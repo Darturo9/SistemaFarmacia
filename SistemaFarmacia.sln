@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoFinalProgra2", "ProyectoFinalProgra2\ProyectoFinalProgra2.csproj", "{580049FC-61DB-49D9-B582-F81458495453}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaPresentacion", "ProyectoFinalProgra2\CapaPresentacion.csproj", "{580049FC-61DB-49D9-B582-F81458495453}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaEntidad", "CapaEntidad\CapaEntidad.csproj", "{D90B5112-E94C-4026-8D9A-E184ED07C46A}"
 EndProject
