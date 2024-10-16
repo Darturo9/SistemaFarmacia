@@ -143,6 +143,8 @@ namespace ProyectoFinalProgra2
                     txtId.Text = dgvData.Rows[indice].Cells["Id"].Value.ToString();
 
 
+                    //se agrega este comentario para comprobar cambios
+
                 }
 
             }
