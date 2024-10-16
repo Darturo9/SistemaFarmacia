@@ -132,7 +132,6 @@ namespace ProyectoFinalProgra2
         }
 
 
-        //se eliminaron los comentarios ingresados
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -143,6 +142,8 @@ namespace ProyectoFinalProgra2
                 if (indice <= 0) {
 
                     txtId.Text = dgvData.Rows[indice].Cells["Id"].Value.ToString();
+
+                    //leer esto cuando este en mi casa
 
                 }
 
