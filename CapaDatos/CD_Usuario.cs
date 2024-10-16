@@ -23,7 +23,7 @@ namespace CapaDatos
                 try
                 {
 
-                    string query = "select * from USUARIO";
+                    string query = "select * from USUARIO Cambio Danilo";
 
                     SqlCommand cmd = new SqlCommand(query, oConexion);
 
