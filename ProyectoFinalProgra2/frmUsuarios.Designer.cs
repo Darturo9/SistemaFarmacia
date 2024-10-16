@@ -50,8 +50,6 @@
             this.btnEliminar = new FontAwesome.Sharp.IconButton();
             this.label9 = new System.Windows.Forms.Label();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
             this.btnSeleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.IdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +60,8 @@
             this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstadoValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.btnLimpiar = new FontAwesome.Sharp.IconButton();
@@ -322,26 +322,6 @@
             this.dgvData.Size = new System.Drawing.Size(853, 489);
             this.dgvData.TabIndex = 19;
             // 
-            // label10
-            // 
-            this.label10.BackColor = System.Drawing.Color.White;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(276, 36);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(858, 47);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "Lista de usuarios:";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(195, 38);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(20, 20);
-            this.txtId.TabIndex = 21;
-            this.txtId.Text = "0";
-            this.txtId.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // btnSeleccionar
             // 
             this.btnSeleccionar.HeaderText = "";
@@ -410,6 +390,26 @@
             this.Estado.Name = "Estado";
             this.Estado.ReadOnly = true;
             // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.White;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(276, 36);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(858, 47);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Lista de usuarios:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(195, 38);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(20, 20);
+            this.txtId.TabIndex = 21;
+            this.txtId.Text = "0";
+            this.txtId.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -424,7 +424,6 @@
             // 
             this.txtBusqueda.Location = new System.Drawing.Point(825, 47);
             this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.PasswordChar = '*';
             this.txtBusqueda.Size = new System.Drawing.Size(190, 20);
             this.txtBusqueda.TabIndex = 24;
             // 
