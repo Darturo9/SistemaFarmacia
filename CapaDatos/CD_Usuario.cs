@@ -87,20 +87,6 @@ namespace CapaDatos
                 using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
                 {
 
-//                    Create proc SP_REGISTRARUSUARIO(
-
-//@Documento varchar(50),
-//@NombreCompleto varchar(100),
-//@Correo varchar(100),
-//@Clave varchar(100),
-//@IdRol int,
-//@Estado bit,
-//@IdUsuarioResultado int output,
-//@Mensaje varchar(500) output
-
-//)
-
-
                     SqlCommand cmd = new SqlCommand("SP_REGISTRARUSUARIO".ToString(), oConexion);
 
                     cmd.Parameters.AddWithValue("Documento",obj.Documento);
@@ -109,11 +95,18 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Clave", obj.Clave);
                     cmd.Parameters.AddWithValue("IdRol", obj.oRol.IdRol);
                     cmd.Parameters.AddWithValue("Estado", obj.Estado);
-                    
 
-                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.Add("IdUsuarioResultado",SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
 
                     oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    idusuariogenerado = Convert.ToInt32(cmd.Parameters["IdUsuarioResultado"].Value);
+                    Mensaje = cmd.Parameters["Mensaje"].Value.ToString();   
                 }
 
             }
@@ -124,6 +117,91 @@ namespace CapaDatos
             }
 
             return idusuariogenerado;
+        }
+
+        public bool Editar(Usuario obj, out string Mensaje)
+        {
+            bool respuesta = false;
+
+            Mensaje = string.Empty;
+
+            try
+            {
+
+                using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
+                {
+
+                    SqlCommand cmd = new SqlCommand("SP_EDITARUSUARIO".ToString(), oConexion);
+
+                    cmd.Parameters.AddWithValue("IdUsuario", obj.IdUsuario);
+                    cmd.Parameters.AddWithValue("Documento", obj.Documento);
+                    cmd.Parameters.AddWithValue("NombreCompleto", obj.NombreCompleto);
+                    cmd.Parameters.AddWithValue("Correo", obj.Correo);
+                    cmd.Parameters.AddWithValue("Clave", obj.Clave);
+                    cmd.Parameters.AddWithValue("IdRol", obj.oRol.IdRol);
+                    cmd.Parameters.AddWithValue("Estado", obj.Estado);
+
+                    cmd.Parameters.Add("Respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Respuesta"].Value);
+                    Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                respuesta = false;
+                Mensaje = ex.Message;
+            }
+
+            return respuesta;
+        }
+
+
+        public bool Eliminar(Usuario obj, out string Mensaje)
+        {
+            bool respuesta = false;
+
+            Mensaje = string.Empty;
+
+            try
+            {
+
+                using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
+                {
+
+                    SqlCommand cmd = new SqlCommand("SP_ELIMINARUSUARIO".ToString(), oConexion);
+
+                    cmd.Parameters.AddWithValue("IdUsuario", obj.IdUsuario);
+
+                    cmd.Parameters.Add("Respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Respuesta"].Value);
+                    Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                respuesta = false;
+                Mensaje = ex.Message;
+            }
+
+            return respuesta;
         }
 
     }
