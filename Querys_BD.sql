@@ -184,27 +184,5 @@ begin
 	   set @Respuesta = 1
 
 	end
-	
-	if not exists(select * from USUARIO where Documento = @Documento and IdUsuario != @IdUsuario)
-	begin 
-
-		update USUARIO set
-		Documento = @Documento, 
-		NombreCompleto = @NombreCompleto, 
-		Correo = @Correo, 
-		Clave = @Clave, 
-		IdRol = @IdRol, 
-		Estado = @Estado
-
-		where IdUsuario = @IdUsuario
-		
-
-		set @Respuesta = 1
-		
-	end
-
-	else
-
-	   set @Mensaje = 'No se puede repetir el documento para mas de 1 usuario'
 
 end
