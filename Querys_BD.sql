@@ -1,0 +1,133 @@
+select * from USUARIO
+select * from ROL
+INSERT INTO ROL(Descripcion) VALUES ('ADMINISTRADOR');
+INSERT INTO ROL(Descripcion) VALUES ('EMPLEADO');
+
+SELECT * FROM USUARIO
+
+SELECT * FROM PERMISO
+
+INSERT INTO USUARIO(Documento, NombreCompleto, Correo, Clave,IdRol,Estado) VALUES ('3683739080101','Danilo Giron', 'giron605@gmail.com','123',1,1);
+
+INSERT INTO USUARIO(Documento, NombreCompleto, Correo, Clave,IdRol,Estado) VALUES ('1010','Josue Xom', '@gmail.com','123',2,1);
+
+INSERT INTO PERMISO(IdRol,NombreMenu) VALUES
+(1,'menuusuario'),
+(1,'menumantenedor'),
+(1,'menuventas'),
+(1,'menucompras'),
+(1,'menuclientes'),
+(1,'menuproveedores'),
+(1,'menureportes'),
+(1,'menuacercade')
+
+select u.IdUsuario, u.Documento, u.NombreCompleto, u.Correo, u.Clave, u.Estado, r.IdRol, r.Descripcion from usuario u
+inner join ROL r on r.IdRol = u.IdRol
+
+
+UPDATE USUARIO set Estado = 0 where IdUsuario = 2
+
+
+select * from USUARIO
+
+Create proc SP_REGISTRARUSUARIO(
+
+@Documento varchar(50),
+@NombreCompleto varchar(100),
+@Correo varchar(100),
+@Clave varchar (100),
+@IdRol int,
+@Estado bit,
+@IdUsuarioResultado int output, 
+@Mensaje varchar(500) output
+
+)
+
+as  
+begin
+
+	set @IdUsuarioResultado = 0
+	set @Mensaje = ''
+	
+	if not exists(select * from USUARIO where Documento = @Documento)
+	begin 
+
+		insert into USUARIO (Documento, NombreCompleto, Correo, Clave, IdRol, Estado) 
+		values (@Documento, @NombreCompleto, @Correo, @Clave,@IdRol, @Estado)
+
+		set @IdUsuarioResultado = SCOPE_IDENTITY()
+		
+	end
+
+	else
+
+	   set @Mensaje = 'No se puede repetir el documento para mas de 1 usuario'
+
+end
+
+
+declare @idusuariogenerado int
+declare @mensaje varchar(500)
+exec SP_REGISTRARUSUARIO '123','pruebas','test@gmail','456',2,1,@idusuariogenerado output,@Mensaje output 
+
+select @idusuariogenerado
+select @mensaje
+
+go
+
+
+Create proc SP_EDITARUSUARIO(
+
+
+@IdUsuario int,
+@Documento varchar(50),
+@NombreCompleto varchar(100),
+@Correo varchar(100),
+@Clave varchar (100),
+@IdRol int,
+@Estado bit,
+@Respuesta bit output, 
+@Mensaje varchar(500) output
+
+)
+
+as  
+begin
+
+	set @Respuesta = 0
+	set @Mensaje = ''
+	
+	if not exists(select * from USUARIO where Documento = @Documento and IdUsuario != @IdUsuario)
+	begin 
+
+		update USUARIO set
+		Documento = @Documento, 
+		NombreCompleto = @NombreCompleto, 
+		Correo = @Correo, 
+		Clave = @Clave, 
+		IdRol = @IdRol, 
+		Estado = @Estado
+
+		where IdUsuario = @IdUsuario
+		
+
+		set @Respuesta = 1
+		
+	end
+
+	else
+
+	   set @Mensaje = 'No se puede repetir el documento para mas de 1 usuario'
+
+end
+
+declare @Respuesta bit
+declare @mensaje varchar(500)
+exec SP_EDITARUSUARIO 1,'123','pruebas 2','test@gmail','456',2,1,@Respuesta output,@Mensaje output 
+
+select @Respuesta
+select @mensaje
+
+select * from USUARIO
+
+go
