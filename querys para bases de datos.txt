@@ -1,1 +1,1 @@
-SELECT * FROM USUARIOS
+UPDATE USUARIO set Estado = 0 where IdUsuario = 2

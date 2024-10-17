@@ -67,6 +67,7 @@
             this.btnEliminar = new FontAwesome.Sharp.IconButton();
             this.btnEditar = new FontAwesome.Sharp.IconButton();
             this.btnGuardar = new FontAwesome.Sharp.IconButton();
+            this.txtIndice = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -474,12 +475,21 @@
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
+            // txtIndice
+            // 
+            this.txtIndice.Location = new System.Drawing.Point(169, 38);
+            this.txtIndice.Name = "txtIndice";
+            this.txtIndice.Size = new System.Drawing.Size(20, 20);
+            this.txtIndice.TabIndex = 28;
+            this.txtIndice.Text = "0";
+            // 
             // frmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1267, 670);
+            this.Controls.Add(this.txtIndice);
             this.Controls.Add(this.cboBusqueda);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);
@@ -555,5 +565,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoValor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.TextBox txtIndice;
     }
 }

@@ -42,17 +42,18 @@ namespace ProyectoFinalProgra2
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            dgvData.Rows.Add(new object[] { "", txtId.Text, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
-                ((OpcionCombo)cboRol.SelectedItem).Valor.ToString(), ((OpcionCombo)cboRol.SelectedItem).Texto.ToString(),
-                ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),((OpcionCombo)cboEstado.SelectedItem).Texto.ToString(),
-            });
+            //dgvData.Rows.Add(new object[] { "", txtId.Text, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
+            //    ((OpcionCombo)cboRol.SelectedItem).Valor.ToString(), ((OpcionCombo)cboRol.SelectedItem).Texto.ToString(),
+            //    ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),((OpcionCombo)cboEstado.SelectedItem).Texto.ToString(),
+            //});
 
-            Limpiar();
+            //Limpiar();
 
         }
 
         private void Limpiar()
         {
+            txtIndice.Text = "-1";
             txtId.Text = "";
             txtDocumento.Text = "";
             txtNombreCompleto.Text = "";
@@ -139,11 +140,42 @@ namespace ProyectoFinalProgra2
             
                 int indice = e.RowIndex;
 
-                if (indice <= 0) {
+                if (indice >= 0) {
 
+
+                    txtIndice.Text = indice.ToString(); 
                     txtId.Text = dgvData.Rows[indice].Cells["Id"].Value.ToString();
                     txtDocumento.Text = dgvData.Rows[indice].Cells["Documento"].Value.ToString();
-                    
+                    txtNombreCompleto.Text = dgvData.Rows[indice].Cells["NombreCompleto"].Value.ToString();
+                    txtCorreo.Text = dgvData.Rows[indice].Cells["Correo"].Value.ToString();
+                    txtClave.Text = dgvData.Rows[indice].Cells["Clave"].Value.ToString();
+                    txtConfirmarClave.Text = dgvData.Rows[indice].Cells["Clave"].Value.ToString();
+
+                    foreach (OpcionCombo oc in cboRol.Items)
+                    {
+
+                        if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvData.Rows[indice].Cells["idRol"].Value))
+                        {
+                            int indice_combo = cboRol.Items.IndexOf(oc);
+
+                            cboRol.SelectedIndex = indice_combo;
+                            break;
+                        }
+
+                    }
+
+                    foreach (OpcionCombo oc in cboEstado.Items)
+                    {
+
+                        if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvData.Rows[indice].Cells["EstadoValor"].Value))
+                        {
+                            int indice_combo = cboEstado.Items.IndexOf(oc);
+
+                            cboEstado.SelectedIndex = indice_combo;
+                            break;
+                        }
+
+                    }
 
                 }
 
