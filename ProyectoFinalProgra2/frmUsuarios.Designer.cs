@@ -259,7 +259,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvData.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvData.RowTemplate.Height = 28;
-            this.dgvData.Size = new System.Drawing.Size(954, 532);
+            this.dgvData.Size = new System.Drawing.Size(780, 532);
             this.dgvData.TabIndex = 19;
             this.dgvData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellContentClick);
             this.dgvData.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvData_CellPainting);
@@ -350,6 +350,7 @@
             this.txtId.Size = new System.Drawing.Size(20, 20);
             this.txtId.TabIndex = 21;
             this.txtId.Text = "0";
+            this.txtId.Visible = false;
             this.txtId.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label11
@@ -433,6 +434,7 @@
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnLimpiar
             // 
@@ -482,6 +484,7 @@
             this.txtIndice.Size = new System.Drawing.Size(20, 20);
             this.txtIndice.TabIndex = 28;
             this.txtIndice.Text = "0";
+            this.txtIndice.Visible = false;
             // 
             // frmUsuarios
             // 

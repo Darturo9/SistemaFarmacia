@@ -56,23 +56,59 @@ namespace ProyectoFinalProgra2
                 Estado = Convert.ToInt32(((OpcionCombo)cboEstado.SelectedItem).Valor) == 1 ? true : false,
             };
 
-            int idusuariogenerado = new CN_Usuario().Registrar(objusuario, out mensaje);
-
-            if (idusuariogenerado > 0)
+            if (objusuario.IdUsuario == 0)
             {
-                MessageBox.Show("Usuario registrado con exito");
-                dgvData.Rows.Add(new object[] { "", idusuariogenerado, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
+
+                int idusuariogenerado = new CN_Usuario().Registrar(objusuario, out mensaje);
+
+                if (idusuariogenerado != 0)
+                {
+                    MessageBox.Show("Usuario registrado con exito");
+                    dgvData.Rows.Add(new object[] { "", idusuariogenerado, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
                 ((OpcionCombo)cboRol.SelectedItem).Valor.ToString(), ((OpcionCombo)cboRol.SelectedItem).Texto.ToString(),
                 ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),((OpcionCombo)cboEstado.SelectedItem).Texto.ToString(),
             });
 
-                Limpiar();
+                    Limpiar();
+                }
+                else
+                {
+                    MessageBox.Show(mensaje);
+
+                }
+
             }
             else
             {
-                MessageBox.Show(mensaje);
+                bool resultado = new CN_Usuario().Editar(objusuario, out mensaje);
+
+                if (resultado) { 
+                
+                    DataGridViewRow row = dgvData.Rows[Convert.ToInt32(txtIndice.Text)];
+
+                    row.Cells["Id"].Value = txtId.Text;
+                    row.Cells["Documento"].Value = txtDocumento.Text;
+                    row.Cells["NombreCompleto"].Value = txtNombreCompleto.Text;
+                    row.Cells["Correo"].Value = txtCorreo.Text;
+                    row.Cells["Clave"].Value = txtClave.Text;
+                    row.Cells["IdRol"].Value = ((OpcionCombo)cboRol.SelectedItem).Valor.ToString();
+                    row.Cells["Rol"].Value = ((OpcionCombo)cboRol.SelectedItem).Texto.ToString();
+                    row.Cells["EstadoValor"].Value = ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString();
+                    row.Cells["Estado"].Value = ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString();
+
+                    Limpiar();
+
+
+                }
+                else
+                {
+                    MessageBox.Show(mensaje);
+                }
+
             }
-            
+
+
+
 
 
         }
@@ -207,6 +243,40 @@ namespace ProyectoFinalProgra2
 
             }
 
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(txtId.Text) != 0)
+            {
+                if(MessageBox.Show("Desea eliminar el usuario?","Mensaje",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+
+                    string mensaje = string.Empty;
+                    Usuario objusuario = new Usuario()
+                    {
+
+                        IdUsuario = Convert.ToInt32(txtId.Text),
+                     
+                    };
+
+
+                    bool respuesta = new CN_Usuario().Eliminar(objusuario, out mensaje);
+
+
+                    if (respuesta)
+                    {
+                        dgvData.Rows.RemoveAt(Convert.ToInt32(txtIndice.Text));
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(mensaje,"mensaje",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                    }
+
+
+                }
+            }   
         }
     }
 }
