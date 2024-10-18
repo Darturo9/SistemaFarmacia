@@ -97,7 +97,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Estado", obj.Estado);
 
                     cmd.Parameters.Add("IdUsuarioResultado",SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar,500).Direction = ParameterDirection.Output;
 
                     cmd.CommandType = CommandType.StoredProcedure;
 

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using CapaDatos;
 using CapaEntidad;
 
 namespace CapaNegocio
@@ -26,19 +25,19 @@ namespace CapaNegocio
         {
             Mensaje = string.Empty;
 
-            if (obj.Documento == '')
+            if (obj.Documento == "")
             {
                 Mensaje += "El campo documento es obligatorio\n";
 
             }
 
-            if (obj.NombreCompleto == '' )
+            if (obj.NombreCompleto == "" )
             {
                 Mensaje += "El campo Nombre Completo es obligatorio\n";
                 
             }
 
-            if (obj.Clave == '')
+            if (obj.Clave == "")
             {
                 Mensaje += "El campo clave es obligatorio\n";
 
@@ -59,20 +58,21 @@ namespace CapaNegocio
 
         public bool Editar(Usuario obj, out string Mensaje)
         {
+            Mensaje = string.Empty;
 
-            if (obj.Documento == '')
+            if (obj.Documento == "")
             {
                 Mensaje += "El campo documento es obligatorio\n";
 
             }
 
-            if (obj.NombreCompleto == '')
+            if (obj.NombreCompleto == "")
             {
                 Mensaje += "El campo Nombre Completo es obligatorio\n";
 
             }
 
-            if (obj.Clave == '')
+            if (obj.Clave == "")
             {
                 Mensaje += "El campo clave es obligatorio\n";
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ProyectoFinalProgra2.Utilidades;
 using CapaEntidad;
 using CapaNegocio;
+using System.Runtime.InteropServices;
 
 namespace ProyectoFinalProgra2
 {
@@ -42,13 +43,36 @@ namespace ProyectoFinalProgra2
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //dgvData.Rows.Add(new object[] { "", txtId.Text, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
-            //    ((OpcionCombo)cboRol.SelectedItem).Valor.ToString(), ((OpcionCombo)cboRol.SelectedItem).Texto.ToString(),
-            //    ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),((OpcionCombo)cboEstado.SelectedItem).Texto.ToString(),
-            //});
 
-            //Limpiar();
+            string mensaje = string.Empty;
+            Usuario objusuario = new Usuario() {
 
+                IdUsuario = Convert.ToInt32(txtId.Text),
+                Documento = txtDocumento.Text,
+                NombreCompleto = txtNombreCompleto.Text,
+                Correo = txtCorreo.Text,
+                Clave = txtClave.Text,
+                oRol = new Rol() { IdRol = Convert.ToInt32(((OpcionCombo)cboRol.SelectedItem).Valor) },
+                Estado = Convert.ToInt32(((OpcionCombo)cboEstado.SelectedItem).Valor) == 1 ? true : false,
+            };
+
+            int idusuariogenerado = new CN_Usuario().Registrar(objusuario, out mensaje);
+
+            if (idusuariogenerado > 0)
+            {
+                MessageBox.Show("Usuario registrado con exito");
+                dgvData.Rows.Add(new object[] { "", idusuariogenerado, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
+                ((OpcionCombo)cboRol.SelectedItem).Valor.ToString(), ((OpcionCombo)cboRol.SelectedItem).Texto.ToString(),
+                ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),((OpcionCombo)cboEstado.SelectedItem).Texto.ToString(),
+            });
+
+                Limpiar();
+            }
+            else
+            {
+                MessageBox.Show(mensaje);
+            }
+            
 
 
         }
