@@ -278,5 +278,10 @@ namespace ProyectoFinalProgra2
                 }
             }   
         }
+
+        private void cboBusqueda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -378,6 +378,7 @@
             this.cboBusqueda.Name = "cboBusqueda";
             this.cboBusqueda.Size = new System.Drawing.Size(148, 21);
             this.cboBusqueda.TabIndex = 27;
+            this.cboBusqueda.SelectedIndexChanged += new System.EventHandler(this.cboBusqueda_SelectedIndexChanged);
             // 
             // btnLimpiarBuscador
             // 
