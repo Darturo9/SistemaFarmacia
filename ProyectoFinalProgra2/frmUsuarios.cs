@@ -303,5 +303,14 @@ namespace ProyectoFinalProgra2
                 }
             }
         }
+
+        private void btnLimpiarBuscador_Click(object sender, EventArgs e)
+        {
+            txtBusqueda.Text = "";
+            foreach (DataGridViewRow row in dgvData.Rows)
+            {
+                row.Visible = true;
+            }
+        }
     }
 }
