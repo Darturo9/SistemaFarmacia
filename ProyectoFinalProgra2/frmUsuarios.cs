@@ -124,6 +124,8 @@ namespace ProyectoFinalProgra2
             txtConfirmarClave.Text = "";
             cboRol.SelectedIndex = 0;
             cboEstado.SelectedIndex = 0;
+
+            txtDocumento.Select();
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -267,6 +269,7 @@ namespace ProyectoFinalProgra2
                     if (respuesta)
                     {
                         dgvData.Rows.RemoveAt(Convert.ToInt32(txtIndice.Text));
+                        Limpiar();
 
                     }
                     else
@@ -282,6 +285,23 @@ namespace ProyectoFinalProgra2
         private void cboBusqueda_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnbuscar_Click(object sender, EventArgs e)
+        {
+            string columnaFiltro = ((OpcionCombo)cboBusqueda.SelectedItem).Valor.ToString();
+
+            if (dgvData.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgvData.Rows)
+                {
+
+                    if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBusqueda.Text.Trim().ToUpper()))
+                        row.Visible = true;
+                    else
+                        row.Visible = false;
+                }
+            }
         }
     }
 }
