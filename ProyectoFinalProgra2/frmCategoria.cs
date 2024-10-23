@@ -57,9 +57,45 @@ namespace ProyectoFinalProgra2
             }
         }
 
-        private void btnguardar_Click(object sender, EventArgs e)
+
+        private void txtDocumento_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Limpiar()
+        {
+
+            txtIndice.Text = "-1";
+            txtId.Text = "0";
+            txtDescripcion.Text = "";
+            cboEstado.SelectedIndex = 0;
+
+            txtDescripcion.Select();
+        }
+
+        private void dgvdata_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (e.ColumnIndex == 0)
+            {
+
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                var w = Properties.Resources.check_box_16dp_000000_FILL0_wght100_GRAD0_opsz20.Width - 30;
+                var h = Properties.Resources.check_box_16dp_000000_FILL0_wght100_GRAD0_opsz20.Height - 30;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(Properties.Resources.check_box_16dp_000000_FILL0_wght100_GRAD0_opsz20, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+        }
+
+        private void btnGuardar_Click_1(object sender, EventArgs e)
+        {
             string mensaje = string.Empty;
 
             Categoria obj = new Categoria()
@@ -108,24 +144,66 @@ namespace ProyectoFinalProgra2
                     MessageBox.Show(mensaje);
                 }
             }
-
-
         }
 
-        private void txtDocumento_TextChanged(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void Limpiar()
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
 
-            txtIndice.Text = "-1";
-            txtId.Text = "0";
-            txtDescripcion.Text = "";
-            cboEstado.SelectedIndex = 0;
+            if (Convert.ToInt32(txtId.Text) != 0)
+            {
+                if (MessageBox.Show("¿Desea eliminar la categoria", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
 
-            txtDescripcion.Select();
+                    string mensaje = string.Empty;
+                    Categoria obj = new Categoria()
+                    {
+                        IdCategoria = Convert.ToInt32(txtId.Text)
+                    };
+
+                    bool respuesta = new CN_Categoria().Eliminar(obj, out mensaje);
+
+                    if (respuesta)
+                    {
+                        dgvData.Rows.RemoveAt(Convert.ToInt32(txtIndice.Text));
+                        Limpiar();
+                    }
+                    else
+                    {
+                        MessageBox.Show(mensaje, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                }
+            }
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+            string columnaFiltro = ((OpcionCombo)cboBusqueda.SelectedItem).Valor.ToString();
+
+            if (dgvData.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgvData.Rows)
+                {
+
+                    if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBusqueda.Text.Trim().ToUpper()))
+                        row.Visible = true;
+                    else
+                        row.Visible = false;
+                }
+            }
+
+        }
+
+        private void btnLimpiarBuscador_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
