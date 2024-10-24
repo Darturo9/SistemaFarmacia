@@ -1,5 +1,6 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
+using ClosedXML.Excel;
 using ProyectoFinalProgra2.Utilidades;
 using System;
 using System.Collections.Generic;
