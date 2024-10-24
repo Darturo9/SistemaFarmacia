@@ -21,6 +21,13 @@ INSERT INTO PERMISO(IdRol,NombreMenu) VALUES
 (1,'menureportes'),
 (1,'menuacercade')
 
+INSERT INTO PERMISO(IdRol,NombreMenu) VALUES
+(2,'menuventas'),
+(2,'menucompras'),
+(2,'menuclientes'),
+(2,'menuproveedores'),
+(2,'menuacercade')
+
 select u.IdUsuario, u.Documento, u.NombreCompleto, u.Correo, u.Clave, u.Estado, r.IdRol, r.Descripcion from usuario u
 inner join ROL r on r.IdRol = u.IdRol
 
@@ -187,9 +194,9 @@ begin
 
 end
 
+select * from CATEGORIA
 
-INSERT INTO CATEGORIA(Descripcion,Estado) VALUES ('FIEBRE Y TOS',1)
-INSERT INTO CATEGORIA(Descripcion,Estado) VALUES ('PRESION ARTERIAL',1)
+
 
 
 create PROC SP_RegistrarCategoria(
@@ -209,6 +216,7 @@ begin
 		set @Mensaje = 'No se puede repetir la descripcion de una categoria'
 	
 end
+
 
 go
 

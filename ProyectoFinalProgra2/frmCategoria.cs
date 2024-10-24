@@ -94,58 +94,6 @@ namespace ProyectoFinalProgra2
             }
         }
 
-        private void btnGuardar_Click_1(object sender, EventArgs e)
-        {
-            string mensaje = string.Empty;
-
-            Categoria obj = new Categoria()
-            {
-                IdCategoria = Convert.ToInt32(txtId.Text),
-                Descripcion = txtDescripcion.Text,
-                Estado = Convert.ToInt32(((OpcionCombo)cboEstado.SelectedItem).Valor) == 1 ? true : false
-            };
-
-            if (obj.IdCategoria == 0)
-            {
-                int idgenerado = new CN_Categoria().Registrar(obj, out mensaje);
-
-                if (idgenerado != 0)
-                {
-
-                    dgvData.Rows.Add(new object[] {"",idgenerado,txtDescripcion.Text,
-                        ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),
-                        ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString()
-                    });
-
-                    Limpiar();
-                }
-                else
-                {
-                    MessageBox.Show(mensaje);
-                }
-
-
-            }
-            else
-            {
-                bool resultado = new CN_Categoria().Editar(obj, out mensaje);
-
-                if (resultado)
-                {
-                    DataGridViewRow row = dgvData.Rows[Convert.ToInt32(txtIndice.Text)];
-                    row.Cells["Id"].Value = txtId.Text;
-                    row.Cells["Descripcion"].Value = txtDescripcion.Text;
-                    row.Cells["EstadoValor"].Value = ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString();
-                    row.Cells["Estado"].Value = ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString();
-                    Limpiar();
-                }
-                else
-                {
-                    MessageBox.Show(mensaje);
-                }
-            }
-        }
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
 
@@ -203,6 +151,68 @@ namespace ProyectoFinalProgra2
 
         private void btnLimpiarBuscador_Click(object sender, EventArgs e)
         {
+            txtBusqueda.Text = "";
+            foreach (DataGridViewRow row in dgvData.Rows)
+            {
+                row.Visible = true;
+            }
+        }
+
+        private void btnlimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            string mensaje = string.Empty;
+
+            Categoria obj = new Categoria()
+            {
+                IdCategoria = Convert.ToInt32(txtId.Text),
+                Descripcion = txtDescripcion.Text,
+                Estado = Convert.ToInt32(((OpcionCombo)cboEstado.SelectedItem).Valor) == 1 ? true : false
+            };
+
+            if (obj.IdCategoria == 0)
+            {
+                int idgenerado = new CN_Categoria().Registrar(obj, out mensaje);
+
+                if (idgenerado != 0)
+                {
+
+                    dgvData.Rows.Add(new object[] {"",idgenerado,txtDescripcion.Text,
+                        ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),
+                        ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString()
+                    });
+
+                    Limpiar();
+                }
+                else
+                {
+                    MessageBox.Show(mensaje);
+                }
+
+
+            }
+            else
+            {
+                bool resultado = new CN_Categoria().Editar(obj, out mensaje);
+
+                if (resultado)
+                {
+                    DataGridViewRow row = dgvData.Rows[Convert.ToInt32(txtIndice.Text)];
+                    row.Cells["Id"].Value = txtId.Text;
+                    row.Cells["Descripcion"].Value = txtDescripcion.Text;
+                    row.Cells["EstadoValor"].Value = ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString();
+                    row.Cells["Estado"].Value = ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString();
+                    Limpiar();
+                }
+                else
+                {
+                    MessageBox.Show(mensaje);
+                }
+            }
 
         }
     }
